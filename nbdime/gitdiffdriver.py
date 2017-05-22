@@ -100,6 +100,7 @@ def main(args=None):
     if opts.subcommand == 'diff':
         return nbdiffapp.main(
             [opts.a, opts.b] +
+            ['--ignore-%s' % name for name in diff_exclusives if getattr(opts, name) is False] +
             ['--%s' % name for name in diff_exclusives if getattr(opts, name)])
     elif opts.subcommand == 'config':
         opts.config_func(opts.scope)
